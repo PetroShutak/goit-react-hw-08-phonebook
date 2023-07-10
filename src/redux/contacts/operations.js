@@ -5,7 +5,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-const fetchContacts = createAsyncThunk(
+export const fetchContacts = createAsyncThunk(
     'contacts/fetchContacts',
     async (_, { rejectWithValue }) => {
         try {
@@ -17,7 +17,7 @@ const fetchContacts = createAsyncThunk(
     }
 );
 
-const addContact = createAsyncThunk(
+export const addContact = createAsyncThunk(
     'contacts/addContact',
     async (contact, { rejectWithValue }) => {
         try {
@@ -29,7 +29,7 @@ const addContact = createAsyncThunk(
     }
 );
 
-const deleteContact = createAsyncThunk(
+export const deleteContact = createAsyncThunk(
     'contacts/deleteContact',
     async (id, { rejectWithValue }) => {
         try {
@@ -41,10 +41,4 @@ const deleteContact = createAsyncThunk(
     }
 );
 
-const operations = {
-    fetchContacts,
-    addContact,
-    deleteContact,
-};
 
-export default operations;

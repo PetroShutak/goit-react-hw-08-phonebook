@@ -1,4 +1,4 @@
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledLink = styled(NavLink)`
@@ -9,15 +9,17 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-
 const Navigation = () => {
   return (
-    <nav style={{
+    <nav
+      style={{
         display: 'flex',
         gap: 20,
-    }}>
-      <StyledLink to="/">Home</StyledLink>
-      <StyledLink to="/contacts">Contacts</StyledLink>
+      }}
+    >
+      <StyledLink to="/register">Register</StyledLink>
+
+      <StyledLink to="/login">Login</StyledLink>
     </nav>
   );
 };

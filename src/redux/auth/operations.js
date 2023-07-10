@@ -3,21 +3,22 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-// // Utility to add JWT
-// const setAuthHeader = token => {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   };
+// Utility to add JWT
+const setAuthHeader = token => {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  };
   
-//   // Utility to remove JWT
-//   const clearAuthHeader = () => {
-//     axios.defaults.headers.common.Authorization = '';
-//   };
+  // Utility to remove JWT
+  const clearAuthHeader = () => {
+    axios.defaults.headers.common.Authorization = '';
+  };
 
-const signUp = createAsyncThunk(
+export const signUp = createAsyncThunk(
     'auth/signup',
     async (credentials, { rejectWithValue }) => {
         try {
             const { data } = await axios.post('/users/signup', credentials);
+            setAuthHeader(data.token);
             return data;
         } catch (error) {
             return rejectWithValue(error);
@@ -25,11 +26,12 @@ const signUp = createAsyncThunk(
     }
 );
 
-const logIn = createAsyncThunk(
+export const logIn = createAsyncThunk(
     'auth/login',
     async (credentials, { rejectWithValue }) => {
         try {
             const { data } = await axios.post('/users/login', credentials);
+            setAuthHeader(data.token);
             return data;
         } catch (error) {
             return rejectWithValue(error);
@@ -37,18 +39,19 @@ const logIn = createAsyncThunk(
     }
 );
 
-const logOut = createAsyncThunk(
+export const logOut = createAsyncThunk(
     'auth/logout',
     async (_, { rejectWithValue }) => {
         try {
             await axios.post('/users/logout');
+            clearAuthHeader();
         } catch (error) {
             return rejectWithValue(error);
         }
     }
 );
 
-const fetchCurrentUser = createAsyncThunk(
+export const fetchCurrentUser = createAsyncThunk(
     'auth/refresh',
     async (_, thunkAPI) => {
         const state = thunkAPI.getState();
@@ -69,14 +72,9 @@ const fetchCurrentUser = createAsyncThunk(
     }
 );
 
-const auth = {
-    signUp,
-    logIn,
-    logOut,
-    fetchCurrentUser,
-};
 
-export default auth;
+
+ 
 
 
 
