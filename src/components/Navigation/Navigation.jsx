@@ -1,18 +1,27 @@
-import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledLink = styled(NavLink)`
+  color: black;
+
+  &.active {
+    color: orange;
+  }
+`;
+
 
 const Navigation = () => {
   return (
-    <nav>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/contacts">Contacts</NavLink>
+    <nav style={{
+        display: 'flex',
+        gap: 20,
+    }}>
+      <StyledLink to="/">Home</StyledLink>
+      <StyledLink to="/contacts">Contacts</StyledLink>
 
-      <NavLink to="/register">Register</NavLink>
+      <StyledLink to="/register">Register</StyledLink>
 
-      <NavLink to="/login">Login</NavLink>
-      <Suspense fallback={<p>Loading...</p>}>
-        <Outlet />
-      </Suspense>
+      <StyledLink to="/login">Login</StyledLink>
     </nav>
   );
 };

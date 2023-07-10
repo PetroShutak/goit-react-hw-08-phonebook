@@ -1,17 +1,18 @@
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
-import Navigation from './Navigation/Navigation';
+import Layout from './Layout/Layout';
 import Home from './Home/Home';
 import Register from '../pages/Register';
 import Contacts from '../pages/Contacts';
 import Login from '../pages/Login';
+
 
 export const App = () => {
   return (
     <>
       <div>
         <Routes>
-          <Route path="/" element={<Navigation />}>
+          <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="contacts" element={<Contacts />} />
             <Route path="register" element={<Register />} />

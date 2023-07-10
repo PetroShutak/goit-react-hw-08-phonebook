@@ -15,7 +15,7 @@ const Home = () => {
         Phone Book. Final App. Creating...
         <br/> 
         <br/>
-        <Button variant="contained">Hello Material UI</Button>
+        <Button variant="contained">Get started</Button>
         </div>
     );
     }
