@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../redux/auth/operations';
 
 const Login = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,7 +18,7 @@ const Login = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    // dispatch(authOperations.logIn({ email, password }));
+    dispatch(logIn({ email, password }));
 
     setEmail('');
     setPassword('');
@@ -25,8 +27,8 @@ const Login = () => {
   return (
     <div>
       <h1>Login</h1>
-    
-      <form onSubmit={handleSubmit} autoComplete="off">
+
+      <form onSubmit={handleSubmit} autoComplete="on">
         <label>
           Email
           <input

@@ -41,7 +41,7 @@ const Register = () => {
     <div>
       <h1>Register</h1>
 
-      <form onSubmit={handleSubmit} autoComplete="off">
+      <form onSubmit={handleSubmit} autoComplete="on">
         <label>
           Name
           <input

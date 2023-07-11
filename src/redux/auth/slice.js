@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signUp, logIn, logOut, fetchCurrentUser } from './operations';
+import { signUp, logIn, logOut, refreshUser } from './operations';
 
 const initialState = {
   user: { name: null, email: null, password: null },
   token: null,
   isLoggedIn: false,
-  isFetchingCurrentUser: false,
+  isRefreshing: false,
   error: null,
 };
 
@@ -13,6 +13,9 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
+    [signUp.pending]: (state, action) => {
+      state.isRefreshing = true;
+    },
     [signUp.fulfilled]: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
@@ -22,6 +25,10 @@ const authSlice = createSlice({
   [signUp.rejected]: (state, action) => {
     state.error = action.payload;
   },
+  [logIn.pending]: (state, action) => {
+    state.isRefreshing = true;
+  },
+
   [logIn.fulfilled]: (state, action) => {
     state.user = action.payload.user;
     state.token = action.payload.token;
@@ -30,7 +37,9 @@ const authSlice = createSlice({
   [logIn.rejected]: (state, action) => {
     state.error = action.payload;
   },
-
+  [logOut.pending]: (state, action) => {
+    state.isRefreshing = true; 
+  },
   [logOut.fulfilled]: (state, action) => {
     state.user = { name: null, email: null, password: null };
     state.token = null;
@@ -40,16 +49,16 @@ const authSlice = createSlice({
     state.error = action.payload;
   },
 
-  [fetchCurrentUser.pending]: (state, action) => {
-    state.isFetchingCurrentUser = true;
+  [refreshUser.pending]: (state, action) => {
+    state.isRefreshing = true;
   },
-  [fetchCurrentUser.fulfilled]: (state, action) => {
+  [refreshUser.fulfilled]: (state, action) => {
     state.user = action.payload;
     state.isLoggedIn = true;
-    state.isFetchingCurrentUser = false;
+    state.isRefreshing = false;
   },
-  [fetchCurrentUser.rejected]: (state, action) => {
-    state.isFetchingCurrentUser = false;
+  [refreshUser.rejected]: (state, action) => {
+    state.isRefreshing = false;
   },
 });
 

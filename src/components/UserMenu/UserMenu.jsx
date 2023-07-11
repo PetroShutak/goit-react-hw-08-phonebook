@@ -1,12 +1,23 @@
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../redux/auth/operations';
+
 const UserMenu = () => {
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logOut());
+  };
+
   return (
-    <div style={{
+    <div
+      style={{
         display: 'flex',
         alignItems: 'center',
         gap: 20,
-    }}>
+      }}
+    >
       <p>mango@mail.com</p>
-      <button>Logout</button>
+      <button onClick={onLogout}>Logout</button>
     </div>
   );
 };
