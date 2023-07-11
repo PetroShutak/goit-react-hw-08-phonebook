@@ -16,7 +16,7 @@ const Header = () => {
         }}>
         <Navigation />
         <AuthNav />
-        <UserMenu />
+        {/* <UserMenu /> */}
             {isLoggedIn && <UserMenu />}
         </header>
     );
