@@ -18,10 +18,12 @@ const UserMenu = () => {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 20,
+        gap: 10,
       }}
     >
-      <img src={avatar} alt="" width="32" />
+      <img src={avatar} alt="" width="32" height="32" style={{
+        borderRadius: '50%',
+      }} />
       <p>{user.name}</p>
       <button onClick={onLogout}>Logout</button>
     </div>
