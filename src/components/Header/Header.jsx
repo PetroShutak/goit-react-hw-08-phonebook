@@ -14,10 +14,8 @@ const Header = () => {
             padding: 20,
             borderBottom: '1px solid black',           
         }}>
-        <Navigation />
-        <AuthNav />
-        {/* <UserMenu /> */}
-            {isLoggedIn && <UserMenu />}
+            <Navigation />
+        {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </header>
     );
     }
