@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Layout from './Layout/Layout';
@@ -6,8 +7,15 @@ import RegisterPage from './Register/Register';
 import ContactsPage from '../pages/ContactsPage';
 import NotFound from './NotFound/NotFound';
 import LoginPage from '../pages/Login';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/auth/operations';
 
 export const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     <>
       <div>
