@@ -10,18 +10,15 @@ import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import { useAuth } from 'redux/auth/useAuth';
+
 
 export const App = () => {
-  const { isRefreshing } = useAuth();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <b>Refreshing user...</b>
-  ) : (
+  return (
     <div>
       <Routes>
         <Route path="/" element={<Layout />}>
