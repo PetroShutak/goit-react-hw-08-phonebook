@@ -21,7 +21,7 @@ export const App = () => {
 
   const { isRefreshing } = useAuth();
 
-  console.log('isRefreshing', isRefreshing);
+  // console.log('isRefreshing', isRefreshing);
 
   return isRefreshing ? (
     <h1>Refresh user...</h1>
