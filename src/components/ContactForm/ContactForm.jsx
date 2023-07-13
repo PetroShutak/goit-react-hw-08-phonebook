@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Label, Input, Button } from './ContactForm.styled';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contacts/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contacts/operations';
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
-// import { getContacts, getError } from 'redux/contacts/selectors';
+import { getContacts, getError } from 'redux/contacts/selectors';
 
 // const notify = {
 //   error: message => toast.error(message),
@@ -15,8 +15,8 @@ const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  // const contacts = useSelector(getContacts);
-  // const error = useSelector(getError);
+  const contacts = useSelector(getContacts);
+  const error = useSelector(getError);
 
   const handleInputChange = event => {
     const { name, value } = event.currentTarget;
@@ -27,8 +27,25 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(addContact({ name, number }));
-    reset();
+    if (name.trim() !== '' && number.trim() !== '') {
+      const isExistingContact = contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      );
+
+      if (isExistingContact) {
+        // toast.error(`${name} is already in contacts`);
+        return;
+      }
+
+      if(error) {
+        // notify.error('problem with server');
+        return;
+      }
+
+      dispatch(addContact({ name, number }));
+      // notify.success(`${name} adding to contacts`);
+      reset();
+    }
   };
 
   const reset = () => {
@@ -40,7 +57,7 @@ const ContactForm = () => {
     <section>
       {/* <ToastContainer /> */}
       
-      {/* {error && <p>Failed to load contacts. Please try again later.</p>} */}
+      {error && <p>Failed to load contacts. Please try again later.</p>}
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">Name:</Label>
         <Input

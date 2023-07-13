@@ -1,15 +1,21 @@
-import { fetchContacts, addContact, deleteContact } from './operations';
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchContacts, addContact, deleteContact } from './operations';
 
-const initialState = {
-  items: [],
-  filter: '',
-};
-
-const contactsSlice = createSlice({
+export const conctactsSlice = createSlice({
   name: 'contacts',
-  initialState,
-  reducers: {},
+  initialState: {
+    contacts: [],
+    isLoading: false,
+    error: null,
+    deleteConfirmation: null,
+  },
+
+  reducers: {
+    setDeleteConfirmation: (state, action) => {
+      state.deleteConfirmation = action.payload;
+    },
+  },
+
   extraReducers: {
     [fetchContacts.pending](state) {
       state.isLoading = true;
@@ -58,4 +64,5 @@ const contactsSlice = createSlice({
   },
 });
 
-export default contactsSlice.reducer;
+export const { setDeleteConfirmation } = conctactsSlice.actions;
+export default conctactsSlice.reducer;

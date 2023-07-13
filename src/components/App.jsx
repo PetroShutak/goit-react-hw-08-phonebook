@@ -12,20 +12,23 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { useAuth } from 'redux/auth/useAuth';
 
-
 export const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  const { isRefreshing } = useAuth();
+  const { isRefreshing, error } = useAuth();
 
   // console.log('isRefreshing', isRefreshing);
 
   return isRefreshing ? (
-    <h1>Refresh user...</h1>
-  ):(
+    error ? (
+      <h1> Something went wrong! Try again later. </h1>
+    ) : (
+      <h1>Refresh user...</h1>
+    )
+  ) : (
     <div>
       <Routes>
         <Route path="/" element={<Layout />}>

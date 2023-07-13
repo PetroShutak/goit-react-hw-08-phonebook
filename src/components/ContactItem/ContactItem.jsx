@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { RiDeleteBin2Line } from 'react-icons/ri';
-import { MdPhone } from 'react-icons/md';
 import DeleteConfirmation from 'components/ContactItem/DeleteConfirmation/DeleteConfirmation';
 import { ContactItemWrapper, ContactName, ContactPhone, DeleteButton } from './ContactItem.styled';
 
@@ -19,10 +17,10 @@ const ContactItem = ({ contact }) => {
     <ContactItemWrapper>
       <ContactName>{contact.name}</ContactName>
       <ContactPhone>
-        <MdPhone /> {contact.phone}
+       {contact.number}
       </ContactPhone>
       <DeleteButton onClick={handleDeleteClick}>
-        <RiDeleteBin2Line />
+        Delete
       </DeleteButton>
 
       {isConfirmingDelete && (
