@@ -24,7 +24,7 @@ export const App = () => {
   console.log('isRefreshing', isRefreshing);
 
   return isRefreshing ? (
-    <h1>Оновлююсь...</h1>
+    <h1>Refresh user...</h1>
   ):(
     <div>
       <Routes>

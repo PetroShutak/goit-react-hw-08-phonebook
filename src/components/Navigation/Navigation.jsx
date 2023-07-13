@@ -1,5 +1,6 @@
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAuth } from 'redux/auth/useAuth';
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -11,13 +12,14 @@ const StyledLink = styled(NavLink)`
 
 
 const Navigation = () => {
+  const { isLoggedIn } = useAuth();
   return (
     <nav style={{
-        display: 'flex',
-        gap: 20,
+      display: 'flex',
+      gap: 20,
     }}>
       <StyledLink to="/">Home</StyledLink>
-      <StyledLink to="/contacts">Contacts</StyledLink>
+      {isLoggedIn && <StyledLink to="/contacts">Contacts</StyledLink>}
     </nav>
   );
 };
