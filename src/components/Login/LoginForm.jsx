@@ -4,8 +4,6 @@ import { logIn } from '../../redux/auth/operations';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -42,59 +40,41 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        sx={{
-          marginTop: '5rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="h4" component="h1" gutterBottom>
+    <div>
+      <h1>Login</h1>
+
+      {error && <Box sx={{ marginBottom: '1rem', color: 'red' }}>{error}</Box>}
+
+      <form onSubmit={handleSubmit} autoComplete="on">
+        <TextField
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleEmailChange}
+          label="Email"
+          placeholder="Enter email"
+          required
+          fullWidth
+          margin="normal"
+        />
+
+        <TextField
+          type="password"
+          name="password"
+          value={password}
+          onChange={handlePasswordChange}
+          label="Password"
+          placeholder="Enter password"
+          required
+          fullWidth
+          margin="normal"
+        />
+
+        <Button type="submit" variant="contained">
           Login
-        </Typography>
-
-        {error && (
-          <Box sx={{ marginBottom: '1rem', color: 'red' }}>{error}</Box>
-        )}
-
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          autoComplete="on"
-          sx={{ width: '100%', maxWidth: '400px' }}
-        >
-          <TextField
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-            label="Email"
-            placeholder="Enter email"
-            required
-            fullWidth
-            margin="normal"
-          />
-
-          <TextField
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-            label="Password"
-            placeholder="Enter password"
-            required
-            fullWidth
-            margin="normal"
-          />
-
-          <Button type="submit" variant="contained" fullWidth>
-            Login
-          </Button>
-        </Box>
-      </Box>
-    </Container>
+        </Button>
+      </form>
+    </div>
   );
 };
 
