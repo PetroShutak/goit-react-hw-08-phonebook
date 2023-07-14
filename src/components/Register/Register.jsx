@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUp } from '../../redux/auth/operations';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -12,8 +14,8 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     switch (name) {
       case 'name':
         setName(value);
@@ -32,8 +34,8 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     // Валідація форми
     if (!name || !email || !password) {
@@ -54,55 +56,75 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-
-      {error && (
-        <Box sx={{ marginBottom: '1rem', color: 'red' }}>{error}</Box>
-      )}
-
-      <form onSubmit={handleSubmit} autoComplete="on">
-        <TextField
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleChange}
-          label="Name"
-          placeholder="Enter name"
-          required
-          fullWidth
-          margin="normal"
-        />
-
-        <TextField
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-          label="Email"
-          placeholder="Enter email"
-          required
-          fullWidth
-          margin="normal"
-        />
-
-        <TextField
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-          label="Password"
-          placeholder="Enter password"
-          required
-          fullWidth
-          margin="normal"
-        />
-
-        <Button type="submit" variant="contained">
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: '5rem',
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
           Register
-        </Button>
-      </form>
-    </div>
+        </Typography>
+
+        {error && (
+          <Typography variant="body2" color="error" gutterBottom>
+            {error}
+          </Typography>
+        )}
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          autoComplete="on"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            maxWidth: '400px',
+            '& .MuiTextField-root': {
+              marginBottom: '1rem',
+            },
+          }}
+        >
+          <TextField
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+            label="Name"
+            placeholder="Enter name"
+            required
+          />
+
+          <TextField
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            label="Email"
+            placeholder="Enter email"
+            required
+          />
+
+          <TextField
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+            label="Password"
+            placeholder="Enter password"
+            required
+          />
+
+          <Button type="submit" variant="contained" fullWidth>
+            Register
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
