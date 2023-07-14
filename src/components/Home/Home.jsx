@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { useAuth } from 'redux/auth/useAuth';
 import { toast } from 'react-toastify';
+import background from '../../images/background.jpg';
 
 const Home = () => {
   const { isLoggedIn } = useAuth();
@@ -25,10 +26,12 @@ const Home = () => {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
-        color: '#010101'
+        color: '#010101',
+        backgroundImage: `url(${background})`,
+        backgroundSize: 'cover',
       }}
     >
-      Phone Book. Final App. Create for memory ...
+       <span style={{ color: '#ffffff' }}>Phone Book. Final App. Create for memory ...</span>
       <br/>
       <br/>
       <Button variant="contained" onClick={handleButtonClick}>
