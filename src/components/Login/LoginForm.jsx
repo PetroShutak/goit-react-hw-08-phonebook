@@ -45,25 +45,35 @@ const Login = () => {
     <Container maxWidth="sm">
       <Box
         sx={{
-          marginTop: '5rem',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          marginTop: '5rem',
         }}
       >
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           Login
         </Typography>
 
         {error && (
-          <Box sx={{ marginBottom: '1rem', color: 'red' }}>{error}</Box>
+          <Typography variant="body2" color="error" gutterBottom>
+            {error}
+          </Typography>
         )}
 
         <Box
           component="form"
           onSubmit={handleSubmit}
           autoComplete="on"
-          sx={{ width: '100%', maxWidth: '400px' }}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            maxWidth: '400px',
+            '& .MuiTextField-root': {
+              marginBottom: '1rem',
+            },
+          }}
         >
           <TextField
             type="email"
@@ -73,8 +83,6 @@ const Login = () => {
             label="Email"
             placeholder="Enter email"
             required
-            fullWidth
-            margin="normal"
           />
 
           <TextField
@@ -85,11 +93,9 @@ const Login = () => {
             label="Password"
             placeholder="Enter password"
             required
-            fullWidth
-            margin="normal"
           />
 
-          <Button type="submit" variant="contained" fullWidth>
+          <Button type="submit" variant="contained">
             Login
           </Button>
         </Box>
