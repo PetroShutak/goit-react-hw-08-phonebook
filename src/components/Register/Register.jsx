@@ -37,7 +37,6 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Валідація форми
     if (!name || !email || !password) {
       setError('Please fill in all fields');
       return;
@@ -46,7 +45,6 @@ const Register = () => {
     try {
       await dispatch(signUp({ name, email, password }));
 
-      // Очищення полів форми після успішної реєстрації
       setName('');
       setEmail('');
       setPassword('');

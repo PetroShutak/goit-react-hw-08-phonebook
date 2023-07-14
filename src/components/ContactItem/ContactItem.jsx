@@ -34,6 +34,7 @@ const ContactItem = ({ contact }) => {
           color="error"
           startIcon={<DeleteIcon />}
           onClick={handleDeleteClick}
+          style={{ position: 'relative' }}
         >
           Delete
         </Button>

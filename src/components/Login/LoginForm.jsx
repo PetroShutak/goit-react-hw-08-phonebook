@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,18 +14,17 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = event => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = event => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    // Валідація форми
     if (!email || !password) {
       setError('Please fill in all fields');
       return;
@@ -33,7 +33,6 @@ const Login = () => {
     try {
       await dispatch(logIn({ email, password }));
 
-      // Очищення полів форми після успішного входу
       setEmail('');
       setPassword('');
     } catch (error) {
@@ -95,9 +94,12 @@ const Login = () => {
             required
           />
 
-          <Button type="submit" variant="contained">
-            Login
-          </Button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+            <Button type="submit" variant="contained" sx={{ width: '40%' }}>
+              Login
+            </Button>
+            <Link to="/register">Don't have an account? Sign Up</Link>
+          </div>
         </Box>
       </Box>
     </Container>

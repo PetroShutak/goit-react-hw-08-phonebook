@@ -32,10 +32,12 @@ const ContactForm = () => {
       );
 
       if (isExistingContact) {
+        alert(`${name} is already in contacts.`);
         return;
       }
 
       if (error) {
+        alert('Failed to load contacts. Please try again later.');
         return;
       }
 
@@ -93,7 +95,7 @@ const ContactForm = () => {
           margin="normal"
         />
 
-        <Button type="submit" variant="contained" sx={{ width: '100%' }}>
+        <Button type="submit" variant="contained" sx={{ width: '40%' }}>
           Add Contact
         </Button>
       </form>

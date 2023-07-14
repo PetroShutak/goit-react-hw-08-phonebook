@@ -1,5 +1,7 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/system';
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -9,18 +11,17 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
+const NavigationContainer = styled(Box)({
+  display: 'flex',
+  gap: '20px',
+});
+
 const Navigation = () => {
   return (
-    <nav
-      style={{
-        display: 'flex',
-        gap: 20,
-      }}
-    >
+    <NavigationContainer component="nav">
       <StyledLink to="/register">Register</StyledLink>
-
       <StyledLink to="/login">Login</StyledLink>
-    </nav>
+    </NavigationContainer>
   );
 };
 
