@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Form, Label, Input, Button } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contacts/operations';
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-import { getContacts, getError } from 'redux/contacts/selectors';
-
-// const notify = {
-//   error: message => toast.error(message),
-//   success: message => toast.success(message),
-// };
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import {
+  getContacts,
+  getError,
+} from '../../redux/contacts/selectors';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -18,32 +17,29 @@ const ContactForm = () => {
   const contacts = useSelector(getContacts);
   const error = useSelector(getError);
 
-  const handleInputChange = event => {
-    const { name, value } = event.currentTarget;
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
     name === 'name' ? setName(value) : setNumber(value);
   };
 
   const dispatch = useDispatch();
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (name.trim() !== '' && number.trim() !== '') {
       const isExistingContact = contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
+        (contact) => contact.name.toLowerCase() === name.toLowerCase()
       );
 
       if (isExistingContact) {
-        // toast.error(`${name} is already in contacts`);
         return;
       }
 
-      if(error) {
-        // notify.error('problem with server');
+      if (error) {
         return;
       }
 
       dispatch(addContact({ name, number }));
-      // notify.success(`${name} adding to contacts`);
       reset();
     }
   };
@@ -54,35 +50,45 @@ const ContactForm = () => {
   };
 
   return (
-    <section>
-      {/* <ToastContainer /> */}
-      
-      {error && <p>Failed to load contacts. Please try again later.</p>}
-      <Form onSubmit={handleSubmit}>
-        <Label htmlFor="name">Name:</Label>
-        <Input
+    <Box sx={{ marginTop: '1rem' }}>
+      {error && (
+        <Typography variant="body2" color="error" gutterBottom>
+          Failed to load contacts. Please try again later.
+        </Typography>
+      )}
+
+      <form onSubmit={handleSubmit}>
+        <TextField
           type="text"
           name="name"
+          label="Name"
           pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
           value={name}
           onChange={handleInputChange}
+          required
+          fullWidth
+          margin="normal"
         />
-        <Label htmlFor="number">Number:</Label>
-        <Input
+
+        <TextField
           type="tel"
           name="number"
+          label="Number"
           pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
           value={number}
           onChange={handleInputChange}
+          required
+          fullWidth
+          margin="normal"
         />
-        <br />
-        <Button type="submit">Add Contact</Button>
-      </Form>
-    </section>
+
+        <Button type="submit" variant="contained">
+          Add Contact
+        </Button>
+      </form>
+    </Box>
   );
 };
 
