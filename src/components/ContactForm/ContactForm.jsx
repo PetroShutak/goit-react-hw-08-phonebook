@@ -50,14 +50,23 @@ const ContactForm = () => {
   };
 
   return (
-    <Box sx={{ marginTop: '1rem' }}>
+    <Box
+      sx={{
+        marginTop: '1rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        maxWidth: '400px',
+        margin: '0 auto',
+      }}
+    >
       {error && (
         <Typography variant="body2" color="error" gutterBottom>
           Failed to load contacts. Please try again later.
         </Typography>
       )}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ width: '100%' }}>
         <TextField
           type="text"
           name="name"
@@ -84,7 +93,7 @@ const ContactForm = () => {
           margin="normal"
         />
 
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" sx={{ width: '100%' }}>
           Add Contact
         </Button>
       </form>
