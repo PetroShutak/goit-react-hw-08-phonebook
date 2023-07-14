@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { useAuth } from 'redux/auth/useAuth';
+import { toast } from 'react-toastify';
 
 const Home = () => {
   const { isLoggedIn } = useAuth();
@@ -10,7 +11,8 @@ const Home = () => {
     if (isLoggedIn) {
       navigate('/contacts');
     } else {
-      alert('Please login or register');
+      // alert('Please login or register');
+      toast.info('Please login or register');
     }
   };
 

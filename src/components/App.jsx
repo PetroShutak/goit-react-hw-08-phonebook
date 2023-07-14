@@ -1,3 +1,5 @@
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout/Layout';
@@ -11,6 +13,8 @@ import { refreshUser } from 'redux/auth/operations';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { useAuth } from 'redux/auth/useAuth';
+import Loader from './Loader/Loader';
+import ErrorPage from './ErrorPage/ErrorPage';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -21,13 +25,15 @@ export const App = () => {
   const { isRefreshing, error } = useAuth();
 
   // console.log('isRefreshing', isRefreshing);
+  // console.log('error', error);
+
+  if (error) {
+    return <ErrorPage />;
+  }
+  
 
   return isRefreshing ? (
-    error ? (
-      <h1> Something went wrong! Try again later. </h1>
-    ) : (
-      <h1>Refresh user...</h1>
-    )
+    <Loader />
   ) : (
     <div>
       <Routes>
@@ -58,6 +64,7 @@ export const App = () => {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ToastContainer autoClose={2000} />
     </div>
   );
 };

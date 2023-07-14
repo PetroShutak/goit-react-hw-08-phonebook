@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations';
-// import Box from '@mui/material/Box';
+import { toast } from 'react-toastify';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/system';
 import { ModalContainer, ModalContent, ButtonGroup as CustomButtonGroup } from './DeleteConfirmation.styled';
@@ -20,7 +20,9 @@ const DeleteConfirmation = ({ contact, onCancel }) => {
 
   const handleConfirmDelete = () => {
     dispatch(deleteContact(contact.id));
-    console.log(`${contact.name} deleted`);
+    if (deleteContact) {
+      toast.success(`${contact.name} deleted`);
+    }
     onCancel();
   };
 
