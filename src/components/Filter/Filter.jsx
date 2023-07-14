@@ -14,7 +14,7 @@ const Filter = () => {
   };
 
   return (
-    <Box sx={{ marginBottom: '1rem' }}>
+    <Box sx={{ marginBottom: '1rem', maxWidth: '300px' }}>
       <Typography variant="body1" gutterBottom>
         Find contacts by name:
       </Typography>
@@ -22,7 +22,6 @@ const Filter = () => {
         type="text"
         onChange={handleFilterChange}
         placeholder="search..."
-        fullWidth
         margin="normal"
       />
     </Box>
