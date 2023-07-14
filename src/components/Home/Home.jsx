@@ -1,15 +1,16 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { useAuth } from 'redux/auth/useAuth';
 
 const Home = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     if (isLoggedIn) {
-      <Link to="/contacts">...</Link>
+      navigate('/contacts');
     } else {
-      alert('Спочатку потрібно увійти в систему'); // Показати сповіщення про вхід в систему
+      alert('Please login or register');
     }
   };
 
