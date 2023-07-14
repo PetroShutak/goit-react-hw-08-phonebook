@@ -1,25 +1,30 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUp } from '../../redux/auth/operations';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 const Register = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleChange = e => {
-    switch (e.target.name) {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
       case 'name':
-        setName(e.target.value);
+        setName(value);
         break;
 
       case 'email':
-        setEmail(e.target.value);
+        setEmail(value);
         break;
 
       case 'password':
-        setPassword(e.target.value);
+        setPassword(value);
         break;
 
       default:
@@ -27,54 +32,75 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(signUp({ name, email, password }));
+    // Валідація форми
+    if (!name || !email || !password) {
+      setError('Please fill in all fields');
+      return;
+    }
 
-    setName('');
-    setEmail('');
-    setPassword('');
+    try {
+      await dispatch(signUp({ name, email, password }));
+
+      // Очищення полів форми після успішної реєстрації
+      setName('');
+      setEmail('');
+      setPassword('');
+    } catch (error) {
+      setError('An error occurred. Please try again later.');
+    }
   };
 
   return (
     <div>
       <h1>Register</h1>
 
+      {error && (
+        <Box sx={{ marginBottom: '1rem', color: 'red' }}>{error}</Box>
+      )}
+
       <form onSubmit={handleSubmit} autoComplete="on">
-        <label>
-          Name
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleChange}
-            placeholder="Enter name"
-          />
-        </label>
+        <TextField
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleChange}
+          label="Name"
+          placeholder="Enter name"
+          required
+          fullWidth
+          margin="normal"
+        />
 
-        <label>
-          Email
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            placeholder="Enter email"
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            placeholder="Enter password"
-          />
-        </label>
+        <TextField
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+          label="Email"
+          placeholder="Enter email"
+          required
+          fullWidth
+          margin="normal"
+        />
 
-        <button type="submit">Register</button>
+        <TextField
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+          label="Password"
+          placeholder="Enter password"
+          required
+          fullWidth
+          margin="normal"
+        />
+
+        <Button type="submit" variant="contained">
+          Register
+        </Button>
       </form>
     </div>
   );
