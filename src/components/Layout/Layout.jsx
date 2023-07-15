@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <div style={{ flex: 1 }}>{children}</div>
+      <div style={{ flex: 1, marginBottom: 'auto' }}>{children}</div>
       <Footer />
       <Suspense fallback={<Loader/>}>
         <Outlet />
