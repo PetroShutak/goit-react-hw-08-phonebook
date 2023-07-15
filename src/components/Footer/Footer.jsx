@@ -7,7 +7,6 @@ const FooterContainer = styled('footer')({
   padding: '20px',
   position: 'fixed',
   bottom: 0,
-  top: 'auto',
   width: '100%',
 });
 
@@ -39,4 +38,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;
