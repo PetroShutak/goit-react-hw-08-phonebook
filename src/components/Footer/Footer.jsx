@@ -5,10 +5,8 @@ import { styled } from '@mui/system';
 const FooterContainer = styled('footer')({
   backgroundColor: '#f5f5f5',
   padding: '20px',
-  position: 'sticky',
-  bottom: 0,
-  width: '100%',
-  top: 'auto',
+  marginTop: 'auto',
+  textAlign: 'center',
 });
 
 const FooterText = styled(Typography)({
