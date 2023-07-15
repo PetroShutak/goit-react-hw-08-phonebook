@@ -6,7 +6,7 @@ import Layout from './Layout/Layout';
 import Home from './Home/Home';
 // import RegisterPage from './Register/Register';
 // import ContactsPage from '../pages/ContactsPage';
-// import NotFound from './NotFound/NotFound';
+import NotFound from './NotFound/NotFound';
 // import LoginPage from '../pages/Login';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
@@ -21,9 +21,6 @@ const RegisterPage = lazy(() =>
 );
 const ContactsPage = lazy(() =>
   import('../pages/ContactsPage' /* webpackChunkName: "contacts-page" */)
-);
-const NotFound = lazy(() =>
-  import('./NotFound/NotFound' /* webpackChunkName: "not-found-page" */)
 );
 
 const LoginPage = lazy(() =>
