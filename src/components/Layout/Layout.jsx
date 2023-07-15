@@ -4,9 +4,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 
-const Layout = ({ children }) => {
-  const hideFooter = window.location.pathname === '/contacts';
-
+const Layout = ({ children, hideFooter }) => {
   return (
     <div>
       <Header />
