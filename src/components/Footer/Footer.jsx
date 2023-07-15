@@ -5,11 +5,10 @@ import { styled } from '@mui/system';
 const FooterContainer = styled('footer')({
   backgroundColor: '#f5f5f5',
   padding: '20px',
-  position: 'sticky',
-  top: 'auto',
+  position: 'fixed',
   bottom: 0,
+  top: auto,
   width: '100%',
-  textAlign: 'center',
 });
 
 const FooterText = styled(Typography)({
@@ -40,4 +39,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Footer; 
