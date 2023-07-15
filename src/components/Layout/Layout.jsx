@@ -1,12 +1,11 @@
 import Header from 'components/Header/Header';
 import Footer from '../Footer/Footer';
-import { Suspense, useLocation } from 'react';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 
 const Layout = ({ children }) => {
-  const location = useLocation();
-  const hideFooter = location.pathname === '/contacts';
+  const hideFooter = window.location.pathname === '/contacts';
 
   return (
     <div>
