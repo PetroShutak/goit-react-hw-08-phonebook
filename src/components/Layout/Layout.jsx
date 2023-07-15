@@ -6,9 +6,9 @@ import Loader from 'components/Loader/Loader';
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <div>{children}</div>
+      <div style={{ flex: 1 }}>{children}</div>
       <Footer />
       <Suspense fallback={<Loader/>}>
         <Outlet />
