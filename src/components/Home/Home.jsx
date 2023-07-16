@@ -29,11 +29,11 @@ const Home = () => {
         color: '#010101',
         backgroundImage: `url(${background})`,
         backgroundSize: 'cover',
+        resizeMode: 'cover',
+        backgroundPosition: 'center',
       }}
     >
-       <span style={{ color: '#ffffff' }}>Phone Book. Final App. Create for memory ...</span>
-      <br/>
-      <br/>
+       <span style={{ color: '#ffffff', padding: '20px', textAlign: 'center'}}>Phone Book. Final App. Create for memory ...</span>
       <Button variant="contained" onClick={handleButtonClick}>
         Get started
       </Button>

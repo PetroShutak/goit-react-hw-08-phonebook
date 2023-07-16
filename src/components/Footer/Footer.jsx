@@ -7,12 +7,15 @@ const FooterContainer = styled('footer')({
   padding: '20px',
   position: 'fixed',
   bottom: 0,
+  left: 0,
   width: '100%',
 });
 
 const FooterText = styled(Typography)({
   fontSize: '14px',
   textAlign: 'center',
+  margin: '0 auto',
+  padding: '0 20px',
 });
 
 const FooterLink = styled(Link)({
